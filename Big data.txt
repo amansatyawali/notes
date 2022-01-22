@@ -1,0 +1,76 @@
+What is big data :
+  Layman definition : 
+    Data that cannot fit in one system
+  
+Features of big data :
+  - Velocity
+    data coming so fast that we cannot handle it
+  - Variety
+    Data can be structured(tables), unstructured(photos, videos) or semistructured(XML, logs, etc)
+  - Verocity
+    Data can contain unwanted information(noise)
+  - Value
+    Data should contain some meaningful insight in it
+  
+How to manage big data :
+  Distributed system - 
+    Divide the data into multiple systems and have a master that connects with all those systems to store portions of the data.
+    This whole file system is a cluster
+  
+    If we have a really big file to store, the master will split it into multiple blocks. Each block will be distributed to the slave nodes to store, 
+      and also stores the information about which block is stored in which slave node. This information is called metadata. With the help of metadata,
+      The master knows where to look the data when it is needed.
+
+
+
+Hadoop start service : 
+  -> start-all.sh
+
+Leave safe mode in hadoop ->
+  -> hadoop dfsadmin -safemode leave
+
+Some commands work like linux(Just add them after hadoop fs -)
+
+  -> eg: 
+  -> hadoop fs -ls /
+  -> hadoop fs -touch /temp.csv
+  -> hadoop fs -cat /temp.csv
+  -> hadoop fs -mkdir /newFolder
+
+
+Copy file from Local File System :
+
+  copyFromLocal or put
+  hadoop fs -copyFromLocal example.csv /newFolder/
+
+Copy file from HDFS to LFS :(used very rarely because the file will be very big)
+  get
+  hadoop fs -get /temp.csv ~/hadoopFiles/
+
+
+Move :
+  hadoop fs -mv /temp.csv /newFolder/
+
+Copy : 
+  hadoop fs -mv /newFolder/temp.csv /
+
+Merge multiple files from LFS and copy to HDFS :
+  appendToFile
+
+  hadoop fs -appendToFile example.csv temp.csv /newFolder/merged.csv
+  # example.csv and temp.csv were in LFS and the output will be saved to /newFolder/merged.csv on HDFS
+
+
+Merge files from HDFS and copy to LFS :
+
+  getmerge
+
+  hadoop fs -getmerge /newFolder/merged.csv /newFolder/example.csv /newFolder/example.csv /newFolder/temp.csv merged2.csv
+
+Change replication factor of a file :
+  -> setrep
+  -> hadoop fs -setrep 2 /newFolder/temp.csv
+
+Get file details in HDFS :
+  -> fsck
+  -> hadoop fsck /newFolder/example.csv
