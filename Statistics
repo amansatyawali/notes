@@ -1,0 +1,39 @@
+5 Number summary -> Find out all 3 quartiles from data (q1, q2(which is the median), q3) after the data is sorted
+
+
+Outliers -> One of the ways to find whether a value is an outlier or not is by adding length of IQR*1.5 to both ends of the IQR
+  and, if a value in data lies outside this range, it is an outlier.
+
+Difference in inferential statistics and descriptive statistics.
+
+Big data -> (For interview) Big data is defined by 3 V's
+  -> (Not for interview) Whenever data is outside the capabilities of the computong architecture, it is considered big data and 
+    population and sample anal ysis is required.
+
+
+Normal distribution : 
+  -> Bell shaped curve
+  -> Approx. 95% of the data will lie within +/- 2*SD of the median
+  -> Approx. 68% of the data will lie within +/- SD of the median
+
+Difference between variance and standard deviation
+
+Scale of measurment :
+  Nominal scale -> Non numerical, where no mathematical operations can be performed.
+  Ordinal data -> Numerical, mathematical operations cannot be performed to gain any insight. (Ranks)
+  Interval scale -> Numerical, when we divid data into intervals. (age group (0-5), age group (5-10))
+  Ratio scale -> 
+
+
+
+Types of sampling : 
+
+
+Problems in sampling :
+  -> Bias in the sample
+  -> Wrong data(people lie)
+
+Factors that influence sample representativeness :
+  -> Sampling procedure
+  -> Sample size
+  -> 
