@@ -5,8 +5,9 @@ Data collection ->
 Data Storage ->
   Google bigQuery
 
-
-
-
-
-
+Data cleaning -> 
+ Google Kubernetes engine
+ Internally uses Airflow
+ Removing garbage data -> 
+   more than 5 -> Potential customers -> Pushing the product  to the user
+   less than or equal to 5 -> Not potential customers -> Recommend other projects
