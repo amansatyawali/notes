@@ -15,11 +15,137 @@ Features of big data :
 How to manage big data :
   Distributed system - 
     Divide the data into multiple systems and have a master that connects with all those systems to store portions of the data.
-    This whole file system is a cluster
+    This whole file system is a cluster. THe  master is connected to all the slaves and all the slaves are connected to each other.
   
     If we have a really big file to store, the master will split it into multiple blocks. Each block will be distributed to the slave nodes to store, 
       and also stores the information about which block is stored in which slave node. This information is called metadata. With the help of metadata,
       The master knows where to look the data when it is needed.
+
+    When we want to store a big file in HDFS, we either give the file to master, or if the file is too big, we just give the file's url to the master.
+    The master then reads the file from that URL. Then it splits the file into multiple portions without actually downloading the file and sends the urls 
+    of those portions to the slave nodes, the slave nodes then download the portion directly from the source and stores it. Each portion is called a block.
+    These blocks are assigned to slave nodes randomly without any set rule. If a slave can contain multiple blocks, multiple blocks may be assigned to
+
+    Whenever we need to retrieve the file that we have stored, we send the request to master. The master then uses the metadata to find which slave nodes 
+    carry the blocks that are a part of the required file. It then sends the request to the slave nodes accordingly, then receives the data from all the 
+    slave nodes, combines the output from all the nodes and sends/stream the file to the client.
+
+  Data Locality :
+
+    Data locality is the concept of moving processing code to the data within your systems, instead of forcing huge data volumes through the network to get it processed.
+    
+    HDFS has data locality that the traditional DFS do not have.
+
+    In traditional DFS, whenever we need to run a program on a file, we send that program to the master node. The master node then retrieves all the blocks of
+    that file, combines the blocks and stores the file in itself. Then it runs the specified program on the entire file in the master node only.
+    Because of this method, the master node must have very high processing and storage capacity, since it has to run the program on the entire file, but 
+    it allows us to have slave nodes with low processing power.
+    This method is called data transfer.
+
+
+    What happens in HDFS is called program transfer.
+    In HDFS, when we need to run a program on a file, send the program to the master node. The master node then looks at the metadata and finds out which nodes 
+    contain the blocks of that file. Then the master node creates replica of that program, one for each slave node that contains the required blocks.
+    Then the master sends the program to those nodes.
+    Each slave node then performs the program parallely on the chunks of the file that they have, and generate an output. It is a temporary output, which is sent back to
+    the master. The master then combines the temporary outputs from all the slave nodes, and sends the final output back to the user.
+
+    If the size of the temporary outputs is big, the master can also delegate the service of combining the temporary outputs to a slave node, which can combine the
+    temporary outputs and only send the final outpur back to the master which can directly send it back to the user.
+    
+    So in traditional DFS, we had to transfer all the data from slaves to master, which would take a lot of time and traffic. Instead, we only send a small program to the
+    slaves in HDFS.
+
+  Replication factor :
+    Number of replicas of each block of a file that will be stored in HDFS. Default value is 3, but can be changed to any number.
+
+    Replicas are required as the nodes or connections can fail any time and also need maintenance down time, so backup resources should be present at all times. 
+
+  Rack awareness :
+    A rack just stores multiple slave nodes.
+
+    In traditional DFS, if a file needed to be stored, it would just look for empty space and copy the blocks wherever it finds it, irrespective of the node or rack.
+    That means, traditional DFS were not rack aware.
+
+    In HDFS, a rule is followed : mimimum 1 copy should be stored in another rack/slave node.
+    So that in any scenario, if a single rack/slave goes down, there is at least 1 slave/rack present that contains those blocks. and the whole file can be 
+    retrieved at all times.
+
+    HDFS is rack aware.
+
+
+  Block size :
+    The default block size in version 1 was 64MB, so the number of blocks is = size/64MB
+    In version 2 and 3, it has been increased to 128MB, so the number of blocks is = size/128MB
+
+    But the block size can be changed according to the size of the file.
+
+  Dynamic storage :
+  
+    When a block's meemory is not used completely, for example: if a file is 300 MB and block size is 128MB, 2 blocks will be fully used, but in the third block, 
+    only 44MB will be occupied, and the rest of 84MB will be free. This memory is unused.
+
+    In traditional DFS, the emprty spaces were left idle.
+
+    In HDFS, the empty spaces are added to a space called block pool. When the size of block pool reaches a certain threshold, that memory is available to the 
+    cluster for storing new blocks.
+    
+
+  Types of Hadoop installation :
+    Pseudo dirtributed system : All the services are running in the same system as a separate entity.
+    Fully distributed system : All services are runnning on separate machines.
+
+  Hadoop Daemons :
+    To run a cluster, different Java programs are required to run parellely for different services.
+    1. Name node : 
+      It handles storage in the master node.
+
+    2. Data node : 
+      It handles storage in slave nodes.
+
+    3. Secondary Name Node : (For checkpointing process)
+
+    4. job Tracker : (called resource manager in V2)
+      It handles processes in the master node.
+
+    5. Task Tracker : (called node manager in V2)
+      It handles processes in the slave node.
+
+    All these processes need to be running for the cluster to be up.
+
+  HDFS workflow :
+    Once Some data is added to a datanode, the data node starts pinging the name node with the information of the data that it contains.
+    This signal is sent after every 3 seconds.
+    The name node monitors this data to make sure that the data node is up and running.
+
+    When the signals are coming in regularly, it is called a happy path scenario.
+
+    In case of faliure in a data node, it will not send the ping and the name node will stop receiving signals. Then the blocks in that data node
+    will be under replicated.
+
+      In that case, the cluster will try to fix this.
+
+      1. it will look for a data node that has space for all the blocks that were stored in the failed data node, and if found, it will copy thise blocks
+        from other data nodes into that new data node.
+
+      2. If it does not find a data node with enough space, it will distribute the blocks into other data nodes.
+
+      When the failed data node comes back up, we are in a state called over replication
+      Then, the name node runs an algorithm called the Shortest Distance Algorithm to check which data node is taking the smallest time to send a signal.
+      Then it keeps the data node withthe shortest time gap and asks the other data node to erase all its data.
+
+    In case of faliure in the name node, it is called single point of faliure (SPOF)
+
+      It is identified when the data nodes stop receiving any signal from the name node.
+      The secondary Name node, is available which is listening to all the signals from the data nodes.
+      The secondary name node then takes over the tasks of the name node.
+    
+    In communication faliure,
+
+      For communication faliure between a data node and name node, there is another signal that is being transmitter between the name node and data nodes, 
+      which is sent at every 1.5 seconds.
+      If the nodes stop receiving this signals, it will also
+
 
 
 
