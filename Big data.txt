@@ -147,6 +147,42 @@ How to manage big data :
       If the nodes stop receiving this signals, it will also
 
 
+  Map reduce :
+
+    There are 2 classes in the map reduce layer :
+    
+    Map class : This class runs the job in each node and generates an intermediate output.
+
+    Reduce class : This class combines the intermediate outputs and generates the final output. It can be run on the master node, or the master can delegate
+      this task to a data node.
+
+    Following steps are folowed when a job is to be run :
+
+    1. User sends a request to the Job tracker
+
+    2. Job tracker reads the program, looks at the input file required, then using the meta data, where to store the input and output, finds the nodes 
+      that contain the blocks of that file.
+
+    3. Job tracker then stores all this information in the <Execution context> in the HDFS in a temporary memory
+
+    4. From there, the Execution context is replicated for each data node that contain the required blocks. Then the program is sent to each data node.
+
+    Map phase :
+      
+      5. The task tracker in each of the data nodes then runs the program on its blocks and store an intermediate output in their data node
+
+    Reduce phase:
+      
+      6. Then all the intermediate outputs have been calculated, the job tracker will either assign a TT to collect and combine all the output or 
+         will do it itself (although usually it is delegated to a TT due to the load on the Master node)
+
+      7. When all the intermediate outputs are combined, the final output is stored back in the <Execution context> of the program.
+
+    8. When the reduce phase is complete, the node assigned for reduce phase informs the job tracker that the final output is stored.
+
+    9. When JT receives the acknowledgement that the final output is generated, it tells the slave nodes to delete the intermediate outputs.
+
+    10.The JT then returns the location of the final output in the HDFS.
 
 
 Hadoop start service : 
