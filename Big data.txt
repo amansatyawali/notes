@@ -184,6 +184,38 @@ How to manage big data :
 
     10.The JT then returns the location of the final output in the HDFS.
 
+  <Shuffle and sort>
+  
+  Faliure scenario ;
+  
+    Task Tracker faliure :
+      A program can fail due to a normal program error, a network error, i/o error or some corruption in data.
+      When a program runs on multiple blocks but fails on a single block, the job tracker gives 4 chances to run the code on 
+      the data before reporting it to the user.
+      If faliure occurs in a task tracker, tthe JT assigns the task to a different TT that has the required block in its DN.
+      (JT also looks for that block in that same DN, and can use it if another copy of that block is found in it)
+      If that code also fails, the JT looks for another DN and assigns it to that TT. if the code fails 4 times on 4 different blocks, only
+      then the error is reported to the user.
+    
+    Job tracker faliure :
+      In version 1, there was no recovery mechanism
+      But now we have <YARN architecture>
+
+
+  The are multiple ways to run Map Reduce on Hadoop :
+  1. Java(Very hard)
+  2. Pig Latin
+  3. Hive / HiveQL/ Hive SQL - 
+    Can handle structured and unstructured(but the data in the file needs to be structured) files but cannot handle 
+    semi-structured data like logs, XML, CSS etc.
+    It provides SQL-loke interface
+
+    Hive turns any query into a set of map reduce instructions and returns the output
+
+  We should not use Hive when :
+  1. The file is small enough that an RDBMS can handle it, because it takes 3x, 5x times than a RDBMS.
+
+  2. The schema of the files is not well defined
 
 Hadoop start service : 
   -> start-all.sh
