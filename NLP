@@ -1,3 +1,5 @@
+https://drive.google.com/drive/folders/1PEalHsRN9n1zQ7v_UF2OOlCzKm5a91Yo
+
 Features of ou language :
 
 Sentences are made of words, words are part of letters
@@ -41,3 +43,62 @@ Search
 
 
 HuggingFace
+
+
+  Corpus -> Collection of text data
+
+  Token -> Words(or symbols) which cannot be reduced
+
+
+
+Preprocessing :
+
+Removing punctuations, accent marks and other diacritics
+
+removing white spaces
+
+  Although removing white spaces helps to some extent, but sometimes it hurts to split only by white space, 
+  for eg : 'New York', 'Rock 'n' Roll', I'm
+
+Expanding abbreviations
+
+removing stop words, sparse terms and particular words
+
+Text 
+
+converting to lower case
+
+converting numbers into words or removing numbers 
+
+
+Stemming : 
+
+  The process of converting a word to its stem form by removing morphological additions from a word
+  but it also makes a lot of mistakes :
+  player, played -> played
+
+  tradition -> tradit
+
+  denied -> deni 
+
+
+  But the reason it is still considered sometimes is because it is very fast
+
+  Mostly used for information retrieval and classification
+
+Lemmatisation :
+ 
+  This process also finds the root of a word, but it does that by using a dictionary and analyses the part of the speech 
+  to understand the actual root of that word.
+
+
+
+Bag of words technique :
+
+  create a table from the data where each column represents a word in the corpus and every sentence is a row
+  and each cell has the frequency of those words in that row(sentence)
+
+  Since each sentence mostly contains less than 98% of all the unique words in the corpus, most of that table is empty, 
+  hence it is called sparse data.
+
+  It does not capture the meaning of the text, but is able to do minor classifications.
