@@ -102,3 +102,51 @@ Bag of words technique :
   hence it is called sparse data.
 
   It does not capture the meaning of the text, but is able to do minor classifications.
+
+  Also, the size of the columns becomes very high, because of which, the table gets very big
+
+
+Bigrams and N-grams :
+
+  We try to find phrases that have occurred in the corpus
+  This is done after tokenization and lemmatization
+  so if we are finding bigrams, we will look for 2 words that have occurred together.
+
+  Example : 'I have really enjoyed reading this book'
+    The bigrams will be : [[I, have], [have, really], [really, enjoyed], [enjoyed, reading], [reading, this], [this, book]]
+
+  For N-grams, we will take N tokens at a time
+
+  In case of bigrams, the number of columns will be more than in case of BOW
+
+  For BOWs or 1-grams, the space is of the order n
+
+  In case of bigrams, it will be less than the order of n^2
+
+  so in case of N-grams, it will be less than the order of n^N
+
+  Bigrams give a good idea of the context. if we take trigrams, it might give us event better idea of the context
+  but as we keep on increasing N, the N-grams become too specific and might not occur a lot of times in the corpus and might
+  not occur even once in testing or production. Also, the space it requires increases exponentially and the table will become 
+  more and more sparse as we increase N.
+  Therefore, mostly only values upto 3 are used in N-grams.
+
+
+TF-IDF :
+
+  Term frequency - Inverse document frequency tells us how important a particular word is to a document in a corpus.
+
+  Term frequency - (Number of times a term t appears in a document)*(Total number of words in a document)
+
+  This is calculated for each term in each document
+
+  *Read max_df and min_df
+
+  Max_df value ranges from 0-1, It gives a threshold of document frequency, over which a word would be ignored.
+  by default it is 1, that means all the words in all documents will be counted
+  If the value is 0.9, that means that the words with document frequency above 90% will be ignored and will not be 
+  used as tokens while creating the table
+
+  max_features :
+  
+  The limit of tokens to be taken, if we take it as 10000, the top 10000 tokens with the highest TF in the corpus will be taken
