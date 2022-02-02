@@ -42,12 +42,12 @@ Search
 
 
 
-HuggingFace
+HuggingFace - website for nlp
 
 
-  Corpus -> Collection of text data
+Corpus -> Collection of text data
 
-  Token -> Words(or symbols) which cannot be reduced
+Token -> Words(or symbols) which cannot be reduced
 
 
 
@@ -63,8 +63,6 @@ removing white spaces
 Expanding abbreviations
 
 removing stop words, sparse terms and particular words
-
-Text 
 
 converting to lower case
 
@@ -86,67 +84,117 @@ Stemming :
 
   Mostly used for information retrieval and classification
 
-Lemmatisation :
+Lemmatization :
  
   This process also finds the root of a word, but it does that by using a dictionary and analyses the part of the speech 
   to understand the actual root of that word.
 
 
-
-Bag of words technique :
-
-  create a table from the data where each column represents a word in the corpus and every sentence is a row
-  and each cell has the frequency of those words in that row(sentence)
-
-  Since each sentence mostly contains less than 98% of all the unique words in the corpus, most of that table is empty, 
-  hence it is called sparse data.
-
-  It does not capture the meaning of the text, but is able to do minor classifications.
-
-  Also, the size of the columns becomes very high, because of which, the table gets very big
+Word Embeddings :
+  The process of rpresenting text data in form of numbers
 
 
-Bigrams and N-grams :
+  Bag of words technique :
 
-  We try to find phrases that have occurred in the corpus
-  This is done after tokenization and lemmatization
-  so if we are finding bigrams, we will look for 2 words that have occurred together.
+    create a table from the data where each column represents a word in the corpus and every sentence is a row
+    and each cell has the frequency of those words in that row(sentence)
 
-  Example : 'I have really enjoyed reading this book'
-    The bigrams will be : [[I, have], [have, really], [really, enjoyed], [enjoyed, reading], [reading, this], [this, book]]
+    Since each sentence mostly contains less than 98% of all the unique words in the corpus, most of that table is empty, 
+    hence it is called sparse data.
 
-  For N-grams, we will take N tokens at a time
+    It does not capture the meaning of the text, but is able to do minor classifications.
 
-  In case of bigrams, the number of columns will be more than in case of BOW
-
-  For BOWs or 1-grams, the space is of the order n
-
-  In case of bigrams, it will be less than the order of n^2
-
-  so in case of N-grams, it will be less than the order of n^N
-
-  Bigrams give a good idea of the context. if we take trigrams, it might give us event better idea of the context
-  but as we keep on increasing N, the N-grams become too specific and might not occur a lot of times in the corpus and might
-  not occur even once in testing or production. Also, the space it requires increases exponentially and the table will become 
-  more and more sparse as we increase N.
-  Therefore, mostly only values upto 3 are used in N-grams.
+    Also, the size of the columns becomes very high, because of which, the table gets very big
 
 
-TF-IDF :
+  Bigrams and N-grams :
 
-  Term frequency - Inverse document frequency tells us how important a particular word is to a document in a corpus.
+    We try to find phrases that have occurred in the corpus
+    This is done after tokenization and lemmatization
+    so if we are finding bigrams, we will look for 2 words that have occurred together.
 
-  Term frequency - (Number of times a term t appears in a document)*(Total number of words in a document)
+    Example : 'I have really enjoyed reading this book'
+      The bigrams will be : [[I, have], [have, really], [really, enjoyed], [enjoyed, reading], [reading, this], [this, book]]
 
-  This is calculated for each term in each document
+    For N-grams, we will take N tokens at a time
 
-  *Read max_df and min_df
+    In case of bigrams, the number of columns will be more than in case of BOW
 
-  Max_df value ranges from 0-1, It gives a threshold of document frequency, over which a word would be ignored.
-  by default it is 1, that means all the words in all documents will be counted
-  If the value is 0.9, that means that the words with document frequency above 90% will be ignored and will not be 
-  used as tokens while creating the table
+    For BOWs or 1-grams, the space is of the order n
 
-  max_features :
+    In case of bigrams, it will be less than the order of n^2
+
+    so in case of N-grams, it will be less than the order of n^N
+
+    Bigrams give a good idea of the context. if we take trigrams, it might give us event better idea of the context
+    but as we keep on increasing N, the N-grams become too specific and might not occur a lot of times in the corpus and might
+    not occur even once in testing or production. Also, the space it requires increases exponentially and the table will become 
+    more and more sparse as we increase N.
+    Therefore, mostly only values upto 3 are used in N-grams.
+
+
+  TF-IDF :
+
+    Term frequency Inverse document frequency tells us how important a particular word is to a document in a corpus.
+
+    Term frequency - tells us how important a roken is in a document, the higher the TF, more important the word is.
+    
+    = (Number of times a term t appears in a document)*(Total number of words in a document)
+
+    This is calculated for each term in each document
+
+    Inverse Document frequency - tells us the inverse how many other documents have the same word, lesser the number of documents
+    containing a token, more important that token is to the document that it is in.
+
+    = ln((Total documents in the corpus)/(Number of documents containing that word))
+
+
+    While analysis, when we split the corpus into training and test set, while working on the test set, and finding the TFIDF in 
+    the test set, we can use IDF from the training data because training data will have a lot more documents and will give a 
+    better idea of IDF of a word.
+
+    *Read max_df and min_df
+
+    Max_df value ranges from 0-1, It gives a threshold of document frequency, over which a word would be ignored.
+    by default it is 1, that means all the words in all documents will be counted
+    If the value is 0.9, that means that the words with document frequency above 90% will be ignored and will not be 
+    used as tokens while creating the table
+
+    max_features :
+    
+    The limit of tokens to be taken, if we take it as 10000, the top 10000 tokens with the highest TF in the corpus will be taken
+
+
+
+  Word2Vec :
+
+  This is a technique to convert a word into a vector of N dimensions. Here each dimension represents a type of quality of a word.
   
-  The limit of tokens to be taken, if we take it as 10000, the top 10000 tokens with the highest TF in the corpus will be taken
+  Word2Vec comes from training an auto encoder NN model on millions of documents.
+
+  
+    Cosine similarity :
+      When we have converted a word to a vector, we can now compare how similar words are based on the cosine value of their 
+      unit vectors.
+
+      if A & B are vectors for 2 words then -> A . B = |A||B|*cos(x)            ...where x is the angle between and B.
+
+      => cos(x) = (A . B) / (|A| * |B|)
+
+      This cos(x) is the cosine similarity
+
+    Cosine distance is just 1 - cosine similarity
+
+*Read auto encoders
+
+
+String similarity :
+
+  Levenshtein distance :
+    This distance is the minimm edit distance between 2 strings.
+
+    Or the minimum number of operations (Insert / Remove / Substitute) required to convert one string to another.
+
+    It helps correcting spelling mistakes or typing errors.
+
+    *Read how it is calculated.
