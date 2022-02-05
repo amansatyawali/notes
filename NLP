@@ -198,3 +198,15 @@ String similarity :
     It helps correcting spelling mistakes or typing errors.
 
     *Read how it is calculated.
+
+  Median distance function :
+    In a big corpus, there might be some incorrect spellings of words, but most of the spellings of that word would be correct,
+    So we find all the usage, correct and incorrect spellings of a word everywhere in the corpus, and then replace all of them with
+    the median so that the wrong spellings are corrected.
+
+
+Information retreival : 
+
+  One of the ways to retrieve information from a large corpus is to create a TFIDF vector from the corpus.
+
+  Then we just use the nearest neighbors algorithm to find the nearest TFIDF vectors closest to the search query.
