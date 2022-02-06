@@ -208,5 +208,4 @@ String similarity :
 Information retreival : 
 
   One of the ways to retrieve information from a large corpus is to create a TFIDF vector from the corpus.
-
   Then we just use the nearest neighbors algorithm to find the nearest TFIDF vectors closest to the search query.
