@@ -12,29 +12,29 @@ class UF_1:
             the value at that position is the element that it is connected to,
             Initialize all the values same as the index"""
 
-        self.parent = [i for i in range(num_objects) ]
+        self.arr = [i for i in range(num_objects) ]
     
     def union(self, p, q) :
         """Connect 2 elements p and q : 
             all the elements with the values same as p, their will change to the value at q """
 
-        p_val = self.parent[p]
-        q_val = self.parent[q]
+        p_val = self.arr[p]
+        q_val = self.arr[q]
 
-        for idx, i in enumerate(self.parent) :
+        for idx, i in enumerate(self.arr) :
             if i == p_val :
-                self.parent[idx] = q_val
+                self.arr[idx] = q_val
 
     def is_connected(self, p, q) :
         """Return True if p and q are connected, otherwise return False :\
             if the 2 elements have the same values at the indices p and q, return True else, return False"""
         
-        return self.parent[p] == self.parent[q]
+        return self.arr[p] == self.arr[q]
 
     def show_array(self) :
         """show all elements in the array"""
 
-        for i in self.parent :
+        for i in self.arr :
             print(i, ' ', end = '')
         
         print('\n')
