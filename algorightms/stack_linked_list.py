@@ -23,7 +23,7 @@ class Stack :
 
     def pop(self) :
         
-        if self.size == 0 :
+        if self.head == None :
             print('Cannot remove, stack already empty')
             return
 
