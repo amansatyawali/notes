@@ -4,9 +4,14 @@ class Stack :
         
         self.head = -1
         self.arr = [-1] * capacity
+        self.max_size = capacity
 
     def push(self, val) :
-        
+
+        if self.head + 1 == self.max_size :
+            print('cannot push, max capacity reached')
+            return
+
         self.head += 1
         self.arr[self.head] = val
         return
@@ -18,10 +23,10 @@ class Stack :
             print('Cannot remove, stack already empty')
             return
 
-        old_head = self.head
+        old_head_val = self.arr[self.head]
         self.arr[self.head] = -1 #This is just used for understanding while displaying the whole array, garbage collection is automatic in python
         self.head -= 1
-        return self.arr[old_head]
+        return old_head_val
 
     def show(self) :
 
