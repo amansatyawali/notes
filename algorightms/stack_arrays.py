@@ -19,7 +19,7 @@ class Stack :
             return
 
         old_head = self.head
-        self.head = -1 #This is just used for understanding while displaying the whole array, garbage collection is automatic in python
+        self.arr[self.head] = -1 #This is just used for understanding while displaying the whole array, garbage collection is automatic in python
         self.head -= 1
         return self.arr[old_head]
 
