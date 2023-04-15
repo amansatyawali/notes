@@ -46,3 +46,24 @@ Insertion sort :
     So number of swaps during insertion sort is equal to the number of inversions present in the input array.
     So if there are ~N inversions in the input array, the time taken by insertion sort will also be ~N. 
     Insertion sort will complete very quickly in such cases
+
+Shell sort :
+    First we see what an h-sort is :
+        this compares elements at a gap of h and sorts them groupwise, using the insertion sort logic.
+        So the only difference is instead of comparing and swapping the current element with the previous element, 
+        we compare the current element with h steps back, we do this for each element from index h to n-1
+
+    So in shell sort, we perform h-sort on the array repeatedly starting with a large value of h, decreasing it in
+    each step, at last we perform h-sort with h=1(which is essentially an insertion sort)
+
+    The idea is that with h-sort, some small elements are moved towards the left and larger ones are moved towards right
+    With each h-sort, more and more values get closer to their correct postion.
+    
+    So during, the last h-sort, which is essentially an insertion sort, there will be very less swaps required as a lot of 
+    elements will be close to their correct position already. This reduces the number if total steps taken to sort the array.
+
+    The time complexity of shell sort is estimated to be around n^(3/2)
+
+    h values :
+        The h values that have shown good results are ones discovered by Knuth ie starting with h=1, we do h=h*3+1, until h is 
+        larger than n 

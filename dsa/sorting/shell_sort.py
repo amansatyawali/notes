@@ -1,3 +1,4 @@
+import time
 import random
 
 def less(a, b) :
@@ -22,12 +23,16 @@ def h_sort(arr, n, h) :
     So the only difference is instead of comparing and swapping the current element with the previous element, 
     we compare the current element with h steps back, we do this for each element from index h to n-1
     """
+    swap_count = 0
     for i in range(h, n) :
-        j = i 
+        j = i
         while j - h >= 0 :
             if less(arr[j], arr[j - h]) :               #Element we compare with is at the position h steps back from the current one
                 swap(arr, j, j - h)
+                swap_count += 1
             j -= h
+    print('h-sort complete for h=', h)
+    print('Swap count = ', swap_count)
     return arr
 
 
@@ -59,19 +64,23 @@ def is_sorted(arr, n) :
     return True
 
 
-def create_random_int_array(size) :
+def create_random_int_array(ARRAY_SIZE) :
     """
     Using the random function, we generate an array with random integers.
     """
     arr = [0] * ARRAY_SIZE
 
     for idx in range(ARRAY_SIZE) :
-        arr[idx] = random.randint(0, 1000)
+        arr[idx] = random.randint(0, 1000000)
     return arr 
 
 
 if __name__ == "__main__" :
     ARRAY_SIZE = 10000
     arr = create_random_int_array(ARRAY_SIZE)
-    arr2 = shell_sort(arr, ARRAY_SIZE)
-    print(is_sorted(arr2, ARRAY_SIZE))
+    start_time = time.time()
+    shell_sort(arr, ARRAY_SIZE)
+    end_time = time.time()
+
+    print('time take = ', end_time - start_time)
+    # print(is_sorted(arr, ARRAY_SIZE))
