@@ -23,16 +23,15 @@ def h_sort(arr, n, h) :
     So the only difference is instead of comparing and swapping the current element with the previous element, 
     we compare the current element with h steps back, we do this for each element from index h to n-1
     """
-    swap_count = 0
     for i in range(h, n) :
         j = i
         while j - h >= 0 :
             if less(arr[j], arr[j - h]) :               #Element we compare with is at the position h steps back from the current one
                 swap(arr, j, j - h)
-                swap_count += 1
+            else :
+                break
             j -= h
     print('h-sort complete for h=', h)
-    print('Swap count = ', swap_count)
     return arr
 
 
@@ -76,11 +75,11 @@ def create_random_int_array(ARRAY_SIZE) :
 
 
 if __name__ == "__main__" :
-    ARRAY_SIZE = 10000
+    ARRAY_SIZE = 10000000
     arr = create_random_int_array(ARRAY_SIZE)
     start_time = time.time()
     shell_sort(arr, ARRAY_SIZE)
     end_time = time.time()
 
     print('time take = ', end_time - start_time)
-    # print(is_sorted(arr, ARRAY_SIZE))
+    print(is_sorted(arr, ARRAY_SIZE))
