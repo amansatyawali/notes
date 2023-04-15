@@ -58,7 +58,8 @@ Shell sort :
 
     The idea is that with h-sort, some small elements are moved towards the left and larger ones are moved towards right
     With each h-sort, more and more values get closer to their correct postion.
-    
+    (It is mathematically proven that if an array is h-sorted, then g-sorted for some integers g and h, it will still remain h sorted)
+
     So during, the last h-sort, which is essentially an insertion sort, there will be very less swaps required as a lot of 
     elements will be close to their correct position already. This reduces the number if total steps taken to sort the array.
 
