@@ -1,19 +1,5 @@
 import random
-
-def less(a, b) :
-    """
-    This can act as a generic funtion to check which of the 2 elements is smaller
-    """
-    return a < b 
-
-
-def swap(arr, i, j) :
-    """
-    This can act as a generic funtion that would swap elements at 2 given indices
-    """
-    temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
+from utils import is_sorted, create_random_int_array, less, swap
 
 
 def h_sort(arr, n, h) :
@@ -33,10 +19,7 @@ def h_sort(arr, n, h) :
 if __name__ == "__main__" :
         
     ARRAY_SIZE = 20
-    arr = [0] * ARRAY_SIZE
-
-    for idx in range(ARRAY_SIZE) :
-        arr[idx] = random.randint(0, 1000)
+    arr = create_random_int_array(ARRAY_SIZE)
 
     print(arr)
     print(h_sort(arr, ARRAY_SIZE, h = 4))
