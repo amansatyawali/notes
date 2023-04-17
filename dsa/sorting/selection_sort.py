@@ -14,7 +14,7 @@ def selection_sort(arr, n) :
 
 
 if __name__ == "__main__" :
-    ARRAY_SIZE = 10000
+    ARRAY_SIZE = 1000
     arr = create_random_int_array(ARRAY_SIZE)
     start_time = time.time()
     selection_sort(arr, len(arr))

@@ -39,7 +39,7 @@ def shell_sort(arr, n) :
 
 
 if __name__ == "__main__" :
-    ARRAY_SIZE = 10000000
+    ARRAY_SIZE = 10000
     arr = create_random_int_array(ARRAY_SIZE)
     start_time = time.time()
     shell_sort(arr, ARRAY_SIZE)
