@@ -2,15 +2,12 @@ import time
 from utils import is_sorted, create_random_int_array, less, swap
 
 def insertion_sort(arr, n) :
-    swap_count = 0
     for i in range(1, n) :
         for j in range(i, 0 , -1) :
             if less(arr[j], arr[j-1]) :
                 swap(arr, j, j - 1)
-                swap_count += 1
             else :
                 break
-    print('swap count = ', swap_count)
     return arr
 
 

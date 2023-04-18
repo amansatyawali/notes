@@ -3,7 +3,6 @@ from utils import is_sorted, create_random_int_array, less, swap
 
 
 def selection_sort(arr, n) :
-
     for i in range(n - 1) :
         smallest_idx = i
         for j in range(i+1, n) :
@@ -14,7 +13,7 @@ def selection_sort(arr, n) :
 
 
 if __name__ == "__main__" :
-    ARRAY_SIZE = 1000
+    ARRAY_SIZE = 10000
     arr = create_random_int_array(ARRAY_SIZE)
     start_time = time.time()
     selection_sort(arr, len(arr))
