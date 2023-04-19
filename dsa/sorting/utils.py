@@ -14,7 +14,7 @@ def create_random_int_array(ARRAY_SIZE) :
     Using the random function, we generate an array with random integers.
     """
     arr = [0] * ARRAY_SIZE
-
+    random_range = ARRAY_SIZE * 100
     for idx in range(ARRAY_SIZE) :
         arr[idx] = random.randint(0, 1000)
     return arr 
