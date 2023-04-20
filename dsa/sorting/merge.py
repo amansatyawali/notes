@@ -13,6 +13,8 @@ def merge(arr, first , mid, last ) :
         mid : index of the start of the second sub array (index of the last element of first sub array should be mid-1)
         last : index of the last element of the second sub array
     """
+    if less(arr[mid - 1], arr[mid]) :        #Checking if the last element of the first subarray is less than the first element 
+        return arr                           # of the second array (that would mean the array is already sorted) 
     aux = arr.copy()
     i = first
     j = mid
