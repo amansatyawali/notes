@@ -16,7 +16,7 @@ def h_sort(arr, n, h) :
             else :
                 break
             j -= h
-    print('h-sort complete for h=', h)
+    # print('h-sort complete for h=', h)
     return arr
 
 
