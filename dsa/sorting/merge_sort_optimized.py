@@ -15,7 +15,8 @@ def merge(arr, aux, first , mid, last ) :
     """
     if less(arr[mid - 1], arr[mid]) :        #Checking if the last element of the first subarray is less than the first element 
         return arr                           # of the second array (that would mean the array is already sorted) 
-    aux = arr.copy()
+    for i in range(first, last + 1) :
+        aux[i] = arr[i]                      # Instead of copying the entire array values into auxiliary, we only copy the part if the array that neets to be sorted
     i = first
     j = mid
     k = first
