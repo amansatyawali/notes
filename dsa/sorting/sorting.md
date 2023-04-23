@@ -68,3 +68,30 @@ Shell sort :
     h values :
         The h values that have shown good results are ones discovered by Knuth ie starting with h=1, we do h=h*3+1, until h is 
         larger than n 
+
+Merge sort :
+
+    We divide the array into half, then each half into 2 halves, then those 4 sub arrays into their halves and so on, until
+    each subarray is just one element. So then, that each element is not sorted, then we start joining the halves back, 
+    but we create an auxiliary array similar to the main array and then merge the 2 halves together into a sorted array using that auxiliary array, we do this operation of merging halves back till the top.
+    At the end we have one complete sorted array
+    
+    The time complexity of this sort is O(Nlog(N)), in best average and worst case 
+    Since in every merge function, we change the values of the auxiliary array only for the part that we are merging for, so at each level, total value changes in auxiliary array are N
+    Also, the merge itself takes N array accesses, for all the merge calls at one level combined.
+
+    And there are log(N) levels for an array of N elements as we will need maximum of log(N) divisions by 2 to half the array 
+    repeatedly until we get a single element in each array.
+    
+    The space complexity is O(N) since, the only extra space we need is the auxiliary array which is the same size of the main array
+
+
+    Optimizations :
+        -> While merging, since we know that the 2 sub arrays are sorted, we can check at the beginning, 
+            if last element of first array < the first element of the second array
+            If that is true, that would mean that the combind array is already sorted and there is no need to merge.
+
+        -> Since the operation of a recursive call is expensive in itself, it is better to sort using recursion for 
+            sorting only large arrays, if the array is small enough, we can just use selection sort to sort that small 
+            sub array, so we don't have to make a recursive call for sorting small arrays.
+            (After testing, I found that using selection sort for an array of length <= 8 worked best for me)
