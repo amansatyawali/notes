@@ -95,3 +95,19 @@ Merge sort :
             sorting only large arrays, if the array is small enough, we can just use selection sort to sort that small 
             sub array, so we don't have to make a recursive call for sorting small arrays.
             (After testing, I found that using selection sort for an array of length <= 8 worked best for me)
+
+
+##Stability :
+    If we use a sorting algorithm to sort the data on one column, then we sort it on another column of the same data, 
+    It should still be sorted by the first column.
+
+    Insertion sort, merge sort are stable
+        Merge sort is stable if merge operation is stable.
+        Which can be if we use the condition that if both column 2 keys are equal during merging, we take value from the left.
+        Because the left sub array's value of column 1 will be smaller since the main array was already sorted on column1 values
+    Selection sort and shell sort are not stable
+        Think that in selection sort, while we check the smallest for the element at index i, when we swap the el at ith index, it can
+        be moved  to any place in the array which could disturb the order
+        For h sort, we check and swap between some gaps, so it is possible that there is another value in between the gap that has same 
+        value in the ith column, so the order might be disrupted.
+    It is diffictult to type how to check these above algorithms in more detail, maybe some day.
