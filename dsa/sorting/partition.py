@@ -1,6 +1,6 @@
 from utils import is_sorted, create_random_int_array, less
 
-def partition(arr, first , mid, last ) :
+def partition(arr, first , last ) :
 
 
 
