@@ -28,6 +28,38 @@ But, in case in the first visit that year, I used up my 5L from the base policy 
 Super top up:
 However, if the last policy had super top up, I can claim the remaining 3L directly in the second visit that year, even if the bill is less than my base value
 
+Pre and post hospitalization:
+These are the covers that pay for medicines, therapy etc. pre and post hospitalization.
+Check how many days of pre hospitalization(mostly 60) and post hospitalization(mostly 180) are covered in the policy
 
-Before leaving a job, try to get the insurance policies converted  to some other policy so that the current once does not get cancelled
+Daycare coverage:
+There may not be a need for admitting in hosptal for the night for treatment, those billes are covered in daycare coverage, 
+we should check for that as well.
+
+Extended coverrage:
+Cover for cosmetic surgery or Ayush treatment
+
+Waiting period:
+There is a waiting period after the date of buying the policy, after which we can apply for a claim, that is around 30 days.
+
+Pre existing diseases:
+There is a waiting period for around 3-4 yrs after which we can get claim for the treatment of a pre existing disease
+
+Slow growing diseases:
+These diseases, even though I do not have them, there will be a waiting period of around 3 years, so check for them
+
+No cover bonus:
+if I do not claim anything in one year, in a no cover bonus, either my base amount will increas, or my premium will decrease.
+Good thing to have
+
+Ambulance charges:
+Good thinkg to have
+
+Cashless hospitals:
+Check how many hospitals have a tie up with the insurance company for a cashless claim, otherwise we will have to pay first and then get reimbursed.
+
+Free healt checkup:
+Lot of policies provide for a free health checkup once a year, this will help to prove when we developed a certain disease
+
+**Before leaving a job, try to get the insurance policies converted  to some other policy so that the current once does not get cancelled
 
