@@ -1,5 +1,5 @@
 import time
-from utils import is_sorted, create_random_int_array, less
+from utils import is_sorted, create_random_int_array
 from merge import merge
 
 def merge_sort(arr, first, last) :
