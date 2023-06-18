@@ -33,7 +33,7 @@ These are the covers that pay for medicines, therapy etc. pre and post hospitali
 Check how many days of pre hospitalization(mostly 60) and post hospitalization(mostly 180) are covered in the policy
 
 Daycare coverage:
-There may not be a need for admitting in hosptal for the night for treatment, those billes are covered in daycare coverage, 
+There may not be a need for admitting in hosptal for the night for treatment, those bills are covered in daycare coverage, 
 we should check for that as well.
 
 Extended coverrage:
@@ -58,7 +58,7 @@ Good thinkg to have
 Cashless hospitals:
 Check how many hospitals have a tie up with the insurance company for a cashless claim, otherwise we will have to pay first and then get reimbursed.
 
-Free healt checkup:
+Free health checkup:
 Lot of policies provide for a free health checkup once a year, this will help to prove when we developed a certain disease
 
 **Before leaving a job, try to get the insurance policies converted  to some other policy so that the current once does not get cancelled
