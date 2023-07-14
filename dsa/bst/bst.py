@@ -5,6 +5,7 @@ class Node:
         self.val = key**2
         self.left = None
         self.right = None
+        self.subtree_size = 1
 
 class BST:
 
@@ -21,22 +22,21 @@ class BST:
             return
         
         self._preorder(curr_node.left)
-        print(curr_node.key)
         self._preorder(curr_node.right)
 
 
     def _insert_node(self, new_node, curr_node) -> Node:
         if curr_node is None:
             return new_node
-        print(curr_node.key, new_node.key)
         if new_node.key == curr_node.key:
             curr_node.val = new_node.val
         elif new_node.key < curr_node.key:
             curr_node.left = self._insert_node(new_node, curr_node.left)
+            curr_node.subtree_size = self.size(curr_node.left) + self.size(curr_node.right) + 1
         elif new_node.key > curr_node.key:
             curr_node.right = self._insert_node(new_node, curr_node.right)
+            curr_node.subtree_size = self.size(curr_node.left) + self.size(curr_node.right) + 1
         return curr_node
-
 
 
     def put(self, key) -> None:
@@ -48,7 +48,7 @@ class BST:
         if curr_node is None:
             return None
         if key == curr_node.key:
-            return curr_node.val
+            return curr_node
         elif key < curr_node.key:
             return self._search(key, curr_node.left)
         elif key > curr_node.key:
@@ -56,7 +56,7 @@ class BST:
 
 
     def get(self, key) -> int:
-        return self._search(key, self.root)
+        return self._search(key, self.root).val
     
 
     def min(self) -> int:
@@ -126,8 +126,32 @@ class BST:
         else:
             return None
 
-            
 
+    def size(self, node) -> int:
+        if node == None:
+            return 0
+        else:
+            return node.subtree_size
+
+
+    def rank(self, key) -> int:
+        rank = 1
+        curr_node = self.root
+
+        while curr_node is not None:
+            if key < curr_node.key:
+                curr_node = curr_node.left
+            elif key > curr_node.key:
+                rank += self.size(curr_node.left) + 1
+                curr_node  = curr_node.right
+            elif key == curr_node.key:
+                rank += self.size(curr_node.left)
+                break
+
+        if curr_node is None:
+            return None
+        else:
+            return rank
 
 
     
@@ -145,10 +169,12 @@ if __name__ == "__main__":
     bst.put(4)
     bst.traverse_preorder()
 
+
+    for i in range(0, 11):
+        print(i, " -> ", bst.rank(i))
+
     print(bst.get(2))
     print(bst.min())
     print(bst.max())
     print(bst.floor(3.4))
     print(bst.ceiling(3.4))
-
-
