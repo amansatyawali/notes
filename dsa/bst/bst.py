@@ -155,7 +155,11 @@ class BST:
 
 
     def delete_min(self) -> Node:
-        self.root = self._delete_min_in_subtree(self.root)
+        if self.root is not None:
+            self.root = self._delete_min_in_subtree(self.root)
+        else:
+            print("Tree is empty")
+            raise ValueError
         
 
     def _delete_min_in_subtree(self, node) -> Node:
@@ -210,6 +214,12 @@ if __name__ == "__main__":
     bst.put(1)
     bst.put(6)
     bst.put(8)
+    bst.delete(8)
+    bst.delete_min()
+    bst.delete_min()
+    bst.delete_min()
+    bst.delete_min()
+    bst.delete_min()
     bst.put(10)
     bst.put(5)
     bst.put(9)
