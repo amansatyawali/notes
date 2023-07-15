@@ -154,7 +154,55 @@ class BST:
             return rank
 
 
-    
+    def delete_min(self) -> Node:
+        self.root = self._delete_min_in_subtree(self.root)
+        
+
+    def _delete_min_in_subtree(self, node) -> Node:
+        if node.left is None:
+            return node.right                           # This means that if right is not present, it will return null deleting the current node, if right is not None, it will return right as the current node
+        else:
+            node.left = self._delete_min_in_subtree(node.left)
+            node.subtree_size = self.size(node.left) + self.size(node.right) + 1
+            return node                                 # This means that if left is present, in that case this node sohould return itself, so that nothing changes for this node
+
+
+    def _get_min_in_subtree(self, node) -> Node:
+        if node.left is None:
+            return node
+        else: 
+            return self._get_min_in_subtree(node)
+
+
+    def delete(self, key) -> None:
+        self.root = self._delete_node_with_key(key, self.root)
+
+
+    def _delete_node_with_key(self, key, node) -> None: 
+        if node is None:
+            print(f"Key {key} does not exist in the tree")
+            raise ValueError
+        elif key == node.key:
+            if node.left is None:
+                return node.right
+            elif node.right is None:                    #This condition will only be true if left is not None because if it was, it would have been caught in the previous condition
+                return node.left
+            else:
+                new_node = self._get_min_in_subtree(node.right)
+                new_node.left, new_node.right = node.left, node.right
+                new_node.right = self._delete_min_in_subtree(new_node.right)
+                new_node.subtree_size = self.size(new_node.left) + self.size(new_node.right) + 1
+                return new_node
+
+        elif key < node.key:
+            node.left = self._delete_node_with_key(key, node.left)
+        elif key > node.key:
+            node.right = self._delete_node_with_key(key, node.right)
+        node.subtree_size = self.size(node.left) + self.size(node.right) + 1
+        return node
+            
+
+
 if __name__ == "__main__":
     bst = BST()
     bst.put(3)
@@ -167,14 +215,13 @@ if __name__ == "__main__":
     bst.put(9)
     bst.put(7)
     bst.put(4)
-    bst.traverse_preorder()
 
 
     for i in range(0, 11):
         print(i, " -> ", bst.rank(i))
 
-    print(bst.get(2))
-    print(bst.min())
-    print(bst.max())
-    print(bst.floor(3.4))
-    print(bst.ceiling(3.4))
+    # print(bst.get(2))
+    # print(bst.min())
+    # print(bst.max())
+    # print(bst.floor(3.4))
+    # print(bst.ceiling(3.4))
