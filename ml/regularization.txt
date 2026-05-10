@@ -1,0 +1,6 @@
+Regularization techniques:
+
+1. dropout
+2. adding ||w||^2 to the loss to reduce larg values of weights (L2 regularizarion)
+3. Data augmentation (like for an imaga, tilting the imae, zooming in etc.)
+4. Early stopping
